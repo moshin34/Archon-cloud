@@ -1,0 +1,28 @@
+services:
+  archon-ui:
+    ports:
+      - "${ARCHON_UI_PORT}:3737"
+    networks:
+      - ai_net
+
+  archon-server:
+    ports:
+      - "${ARCHON_SERVER_PORT}:8181"
+    networks:
+      - ai_net
+
+  archon-mcp:
+    ports:
+      - "${ARCHON_MCP_PORT}:8051"
+    networks:
+      - ai_net
+
+  archon-agents:
+    ports:
+      - "${ARCHON_AGENTS_PORT}:8052"
+    networks:
+      - ai_net
+
+networks:
+  ai_net:
+    external: true
