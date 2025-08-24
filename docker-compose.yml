@@ -30,7 +30,7 @@ services:
       - ARCHON_MCP_PORT=${ARCHON_MCP_PORT:-8051}
       - ARCHON_AGENTS_PORT=${ARCHON_AGENTS_PORT:-8052}
     networks:
-      - app-network
+      - ai_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Docker socket for MCP container control
       - ./python/src:/app/src # Mount source code for hot reload
@@ -88,7 +88,7 @@ services:
       - ARCHON_SERVER_PORT=${ARCHON_SERVER_PORT:-8181}
       - ARCHON_AGENTS_PORT=${ARCHON_AGENTS_PORT:-8052}
     networks:
-      - app-network
+      - ai_net
     depends_on:
       - archon-server
       - archon-agents
@@ -128,7 +128,7 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
       - ARCHON_AGENTS_PORT=${ARCHON_AGENTS_PORT:-8052}
     networks:
-      - app-network
+      - ai_net
     healthcheck:
       test:
         [
@@ -155,7 +155,7 @@ services:
       - ARCHON_SERVER_PORT=${ARCHON_SERVER_PORT:-8181}
       - HOST=${HOST:-localhost}
     networks:
-      - app-network
+      - ai_net
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3737"]
       interval: 30s
@@ -168,5 +168,5 @@ services:
       - archon-server
 
 networks:
-  app-network:
-    driver: bridge
+  ai_net:
+    external: true
